@@ -5,13 +5,14 @@
   "main": "build/main.js",
   "scripts": {
     "start": "npm run dev:script & npm run dev:server",
-    "dev:script": "watchify -t babelify app/index.js -o build/main.js",
+    "dev:script": "watchify -t babelify -t glslify app/index.js -o build/main.js",
     "dev:server": "browser-sync start --server --files './' --port 3000 --no-ui",
     "build": "browserify -t babelify -t stripify app/index.js | uglifyjs -o build/main.js"
   },
   "author": "Valentin Daguenet <valentin.daguenet@gmail.com> (http://vdaguenet.fr)",
   "license": "ISC",
   "dependencies": {
+    "browserify-shader": "^0.1.0",
     "dat-gui": "^0.5.0",
     "domready": "^1.0.8",
     "gsap": "^1.17.0",
@@ -22,6 +23,7 @@
     "babelify": "^6.1.2",
     "browser-sync": "^2.7.5",
     "browserify": "^10.2.1",
+    "glslify": "^2.3.1",
     "stripify": "^3.0.0",
     "uglifyjs": "^2.4.10",
     "watchify": "^3.2.1"
