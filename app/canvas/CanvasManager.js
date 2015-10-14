@@ -1,5 +1,6 @@
+import Sound from '../../build/vendors/Sound'
 export default class CanvasManager {
-  constructor(width = 200,height = 200) {
+  constructor(width = 500,height = 500) {
 
     this.canvas = document.createElement('canvas');
     this.canvas.width = width;
@@ -22,11 +23,12 @@ export default class CanvasManager {
     this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);
 
 
-    for(let i = 0,ln = 180;i<ln;i++) {
+    let data = Sound.getData()
+    for(let i = 0,ln = 512;i<ln;i++) {
         let color =  (i%2 ==1)? "black":"transparent";
         this.ctx.fillStyle=color;
         // console.log(  this.ctx.fillStyle);
-        this.ctx.fillRect(0,i*5,window.innerWidth,Math.sin(this.tick)*9);
+        this.ctx.fillRect(i*5,0,5,data.freq[i]);
     }
     this.ctx.fill();
 

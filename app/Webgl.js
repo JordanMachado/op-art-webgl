@@ -4,6 +4,7 @@ import Plane from './objects/Plane';
 import Cube from './objects/Cube';
 import THREE from 'three';
 import Utils from './Utils';
+import _ from 'underscore';
 window.THREE = THREE;
 import CanvasManager from './canvas/CanvasManager';
 
@@ -13,7 +14,6 @@ let controls;
 
 export default class Webgl {
   constructor(width, height) {
-
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);
     this.camera.position.z = 500;
@@ -21,10 +21,11 @@ export default class Webgl {
     let canvas = document.createElement("canvas");
     canvas.id = "webgl";
     this.renderer = new THREE.WebGLRenderer({
-      canvas: canvas
+      canvas: canvas,
+      alpha:true
     });
     this.renderer.setSize(width, height);
-    this.renderer.setClearColor(0xF7FDFF);
+    this.renderer.setClearColor( 0xFFFFFF, 1 );
 
     controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
 
@@ -39,6 +40,7 @@ export default class Webgl {
     }
 
     this.cube = new Cube();
+    window.cube = this.cube;
     this.scene.add(this.cube);
 
     this.plane = new Plane();
@@ -59,12 +61,12 @@ export default class Webgl {
   }
 
   resize(width, height) {
-    // this.composer.setSize(width, height);
-    //
-    // this.camera.aspect = width / height;
-    // this.camera.updateProjectionMatrix();
-    //
-    // this.renderer.setSize(width, height);
+    this.composer.setSize(width, height);
+
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix();
+
+    this.renderer.setSize(width, height);
   };
 
   mousemove(x, y) {
@@ -76,7 +78,7 @@ export default class Webgl {
 
   };
 
-  render() {
+  render(data) {
     if (this.usePostprocessing) {
       this.composer.reset();
       this.composer.renderer.clear();
@@ -97,7 +99,10 @@ export default class Webgl {
 
     this.camera.lookAt(this.scene.position);
 
-
+    if(data.acuteAverage>0.4){
+      this.cube.rotate(Math.floor(Math.random()*4))
+      // console.log(data.acuteAverage);
+    }
     this.plane.update();
     this.cube.update();
     controls.update();
