@@ -22,7 +22,7 @@ domready(() => {
 
   // Sound.load("build/UndroidDiomede.mp3");
   // Sound.load("build/sound.mp3");
-  // window.sound = Sound;
+  window.sound = Sound;
   // GUI settings
   gui = new dat.GUI();
   gui.add(webgl, 'usePostprocessing');
