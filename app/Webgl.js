@@ -6,8 +6,9 @@ import THREE from 'three';
 import Utils from './Utils';
 import _ from 'underscore';
 window.THREE = THREE;
+import dat from 'dat-gui';
 import CanvasManager from './canvas/CanvasManager';
-
+let gui;
 let start = Date.now();
 let controls;
 
@@ -48,6 +49,12 @@ export default class Webgl {
 
     let canvasManager = new CanvasManager(500, 500);
     let texture = new THREE.Texture(canvasManager.canvas);
+
+    gui = new dat.GUI();
+    console.log(this.camera.position);
+    gui.add(this.camera.position, 'x',  0,500 );
+    gui.add(this.camera.position, 'y',0,500 );
+    gui.add(this.camera.position, 'z',0,500 );
 
 
   }
