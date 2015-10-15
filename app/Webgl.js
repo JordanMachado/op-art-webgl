@@ -18,8 +18,7 @@ export default class Webgl {
     this.camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000);
     this.camera.position.z = 500;
 
-    let canvas = document.createElement("canvas");
-    canvas.id = "webgl";
+    let canvas = document.querySelector("#webgl");
     this.renderer = new THREE.WebGLRenderer({
       canvas: canvas,
       alpha:true

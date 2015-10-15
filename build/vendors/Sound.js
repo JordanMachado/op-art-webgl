@@ -46,7 +46,7 @@ class Sound extends Emitter {
 
       console.log(this._source );
       this.player.setAttribute('src', this.url);
-      this.player.play();
+
       // this.player.currentTime = 80;
       // this.player.currentTime = 0;
 
@@ -56,13 +56,21 @@ class Sound extends Emitter {
 
       this._source.connect(gainNode);
       gainNode.connect(this._context.destination);
-      gainNode.gain.value = -1;
+      // gainNode.gain.value = -1;
 
 
       this.emit( "start" )
     }, () => {
       console.log( "error" )
     } )
+  }
+
+  play() {
+    this.player.volume = 0;
+    this.player.play();
+    TweenLite.to(this.player,2.5,{
+      volume:1
+    })
   }
 
   getData() {
