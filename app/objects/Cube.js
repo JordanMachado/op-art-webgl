@@ -39,7 +39,8 @@ export default class Cube extends THREE.Object3D {
       vertexShader: glslify('../shader/cube/cube.vert'),
       fragmentShader: fragment_compiled,
       // side: THREE.DoubleSide
-      transparent:true
+      transparent:true,
+      side:THREE.DoubleSide
     });
 
     this.mesh = new THREE.Mesh(this.geom, this.mat);
@@ -50,8 +51,7 @@ export default class Cube extends THREE.Object3D {
 
 
   }
-  rotate(type) {
-
+  rotate(type,vol) {
     if(Date.now()- this.lastCall>200){
 
     this.lastCall = Date.now();

@@ -7,6 +7,7 @@ import raf from 'raf';
 import dat from 'dat-gui';
 import 'gsap';
 import Sound from '../build/vendors/Sound'
+import Intro from './Intro'
 
 
 let webgl;
@@ -21,9 +22,11 @@ domready(() => {
   document.addEventListener( 'mousemove', mouseMoveHandler, false );
 
   // Sound.load("build/UndroidDiomede.mp3");
-  // Sound.load("build/sound.mp3");
-  window.sound = Sound;
-  // GUI settings
+  // Sound.load("build/Ganja White Night - Champagne.mp3");
+  Sound.load("build/sound.mp3");
+  // window.sound = Sound;
+  // // GUI settings
+  new Intro();
   gui = new dat.GUI();
   gui.add(webgl, 'usePostprocessing');
  canvas=document.getElementById("webgl")
@@ -47,7 +50,8 @@ function animate() {
   let ratio = 0.29 * data.bassAverage + 0.12;
 
 
-  canvas.style.boxShadow = "0px 0px 120px -6px rgba(115,119,243,"+ratio+")";
+  // canvas.style.boxShadow = "0px 0px 120px -6px rgba(115,119,243,"+ratio+")";
+  // canvas.style.boxShadow = "0px 0px 120px -6px rgba(10,13,119,"+ratio+")";
   raf(animate);
   webgl.render(data);
 }

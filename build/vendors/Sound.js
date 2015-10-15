@@ -47,8 +47,8 @@ class Sound extends Emitter {
       console.log(this._source );
       this.player.setAttribute('src', this.url);
       this.player.play();
-      // this.player.currentTime = 116;
-      this.player.currentTime = 0;
+      // this.player.currentTime = 80;
+      // this.player.currentTime = 0;
 
       window.source = this._source;
 
@@ -56,7 +56,7 @@ class Sound extends Emitter {
 
       this._source.connect(gainNode);
       gainNode.connect(this._context.destination);
-      // gainNode.gain.value = -1;
+      gainNode.gain.value = -1;
 
 
       this.emit( "start" )
@@ -72,6 +72,8 @@ class Sound extends Emitter {
     let _fregAverage = 0;
     let _bassAverage = 0;
     let _acuteAverage = 0;
+    let _freq5Average = [0,0,0,0,0];
+
 
     // 174 because other values are always at 0
     for (var i = 0; i < 174; i++) {
@@ -79,22 +81,39 @@ class Sound extends Emitter {
       if(i<5 && i>0) {
         _bassAverage += this._dataFreqArray[i];
       }
-
       if(i> 174 - 5) {
         _acuteAverage += this._dataFreqArray[i];
       }
+      if(i>0 && i<10) {
+        _freq5Average[0]+=this._dataFreqArray[i];
+      }
+      if(i>50 && i<60) {
+        _freq5Average[1]+=this._dataFreqArray[i];
+      }
+      if(i>80 && i<90) {
+        _freq5Average[2]+=this._dataFreqArray[i];
+      }
+      if(i>120 && i<130) {
+        _freq5Average[3]+=this._dataFreqArray[i];
+      }
+      if(i>155 && i<160) {
+        _freq5Average[4]+=this._dataFreqArray[i];
+      }
 
     }
-    _fregAverage = _fregAverage/this._dataFreqArray.length;
+    _fregAverage = _fregAverage/(255*174);
     _bassAverage = _bassAverage/(255*4);
     _acuteAverage = _acuteAverage/(255*4);
-    // console.log(_acuteAverage);
+    for (var i = 0; i < _freq5Average.length; i++) {
+      _freq5Average[i] = _freq5Average[i]/200
+    }
 
 
 
       // this._context.currentTime = 50;
 
     return {
+      freq5:_freq5Average,
       fregAverage:_fregAverage,
       bassAverage:_bassAverage,
       acuteAverage:_acuteAverage,

@@ -101,12 +101,10 @@ export default class Webgl {
 
     if(data.acuteAverage>0.4){
       this.cube.rotate(Math.floor(Math.random()*4))
-      // console.log(data.acuteAverage);
     }
-    this.plane.update();
+    this.plane.update(data.fregAverage,data.freq5);
     this.cube.update();
     controls.update();
-    // uniforms['u_time'].value = 0.0003 * (Date.now() - start);
 
   }
 }
