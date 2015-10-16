@@ -13,45 +13,51 @@ export default class Intro extends Emitter{
 
    this.button = document.querySelector('#start');
    this.button.onclick = this.onClickStart.bind(this)
-   console.log('intro started');
+
   }
 
   start() {
 
     TweenLite.set(this.title,{
-      y:-20
+      y:-90
     })
     TweenLite.set(this.loader,{
-      y:-15
+      y:-25
     })
     TweenLite.set(this.button,{
-      y:0
+      y:20
     })
     TweenLite.set(this.credits,{
       y:-10
     })
 
     let timeline = new TimelineLite()
-    timeline.to(this.title,0.5,{
+    timeline.to(this.title,0.8,{
       opacity:1,
-      y:0
+      y:-20,
+      ease:Quad.easeOut
     })
     timeline.to(this.loader,0.5,{
       opacity:1,
-      y:0
-    },"-=0.2")
+      y:20,
+      ease:Quad.easeOut
+    },"-=0.4")
     timeline.to(this.credits,0.5,{
       opacity:1,
-      y:0
+      y:0,
+      ease:Quad.easeOut
     },"-=0.3")
+
   }
   loaded() {
     TweenLite.to(this.loader,0.3,{
-      opacity:0
+      opacity:0,
+      ease:Quad.easeOut
     });
     TweenLite.to(this.button,0.3,{
       opacity:1,
-      delay:0.5
+      delay:0.5,
+      ease:Quad.easeOut
     });
   }
   end() {
@@ -60,33 +66,35 @@ export default class Intro extends Emitter{
 
     timeline.to(this.credits,0.5,{
       opacity:0,
-      y:-10
+      y:-10,
+      ease:Quad.easeOut
     },"-=0.3");
 
     timeline.to(this.button,0.5,{
       opacity:0,
-      y:-15
+      y:-15,
+      ease:Quad.easeOut
     },"-=0.3");
 
     timeline.to(this.title,0.5,{
       opacity:0,
-      y:-20
+      y:-20,
+      ease:Quad.easeOut
     },"-=0.2");
-
     setTimeout(()=>{
+    this.emit('end')
+  }.bind(this),600);
+    setTimeout(()=>{
+
       TweenLite.to(this.el,0.7,{
         autoAlpha:0,
-        onComplete:()=> {
-          this.emit('end')
-        }
+        ease:Quad.easeOut
       });
 
     }.bind(this), 500);
 
   }
   onClickStart() {
-    console.log('yolo');
-    console.log(this);
     this.end()
 
   }

@@ -23,23 +23,21 @@ domready(() => {
   canvas = document.querySelector('#webgl')
 
   // Sound.load("build/UndroidDiomede.mp3");
-  // Sound.load("build/Ganja White Night - Champagne.mp3");
+  Sound.load("build/Gramatik-MuyTranquilo.mp3");
 
 
   intro = new Intro();
   intro.start();
-  Sound.load("build/sound.mp3");
+  // Sound.load("build/sound.mp3");
   Sound.on("start",function() {
     intro.loaded();
   })
   intro.on('end',function(){
-    Sound.play()
+    Sound.play();
+    webgl.intro();
+
   })
   window.sound = Sound;
-
-  gui = new dat.GUI();
-  gui.add(webgl, 'usePostprocessing');
-
 
   // handle resize
   window.onresize = resizeHandler;

@@ -44,7 +44,6 @@ class Sound extends Emitter {
 
       // this._source.start( 0 )
 
-      console.log(this._source );
       this.player.setAttribute('src', this.url);
 
       // this.player.currentTime = 80;
