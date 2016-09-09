@@ -1,4 +1,4 @@
-Gégoire Cortesi
+OPT art
 ===================
 My experiement for our webGL workshop at Gobelins.
 
