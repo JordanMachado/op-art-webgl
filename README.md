@@ -1,4 +1,4 @@
-OPT art
+OP art
 ===================
 My experiement for our webGL workshop at Gobelins.
 
